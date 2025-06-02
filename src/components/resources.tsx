@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Card,
   CardContent,
@@ -7,6 +7,8 @@ import {
   CardTitle,
 } from "./ui/card";
 import { ExternalLink } from "lucide-react";
+import { ThemeToggle } from "./ui/theme-toggle";
+import { MobileNav } from "./ui/mobile-nav";
 
 const ResourcesPage = () => {
   const resources = [
@@ -48,6 +50,13 @@ const ResourcesPage = () => {
     },
   ];
 
+  useEffect(() => {
+    if (!localStorage.getItem("theme")) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+  }, []);
+
   return (
     <div className="min-h-screen bg-background">
       <header className="sticky top-0 z-10 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -57,26 +66,30 @@ const ResourcesPage = () => {
               COVID-19 Data Dashboard
             </h1>
           </div>
-          <nav className="flex items-center gap-4">
-            <a
-              href="/"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground"
-            >
-              Dashboard
-            </a>
-            <a
-              href="/about"
-              className="text-sm font-medium text-muted-foreground hover:text-foreground"
-            >
-              About
-            </a>
-            <a
-              href="/resources"
-              className="text-sm font-medium text-foreground"
-            >
-              Resources
-            </a>
-          </nav>
+          <div className="flex items-center gap-4">
+            <nav className="hidden md:flex items-center gap-4">
+              <a
+                href="/"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground"
+              >
+                Dashboard
+              </a>
+              <a
+                href="/about"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground"
+              >
+                About
+              </a>
+              <a
+                href="/resources"
+                className="text-sm font-medium text-foreground"
+              >
+                Resources
+              </a>
+            </nav>
+            <ThemeToggle />
+            <MobileNav currentPath="/resources" />
+          </div>
         </div>
       </header>
 

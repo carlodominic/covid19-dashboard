@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import DashboardLayout from "./dashboard/DashboardLayout";
 import {
   Card,
@@ -8,6 +8,8 @@ import {
   CardTitle,
 } from "./ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./ui/tabs";
+import { ThemeToggle } from "./ui/theme-toggle";
+import { MobileNav } from "./ui/mobile-nav";
 
 const HomePage = () => {
   return (
@@ -19,30 +21,34 @@ const HomePage = () => {
               COVID-19 Data Dashboard
             </h1>
           </div>
-          <nav className="flex items-center gap-4">
-            <Tabs defaultValue="dashboard" className="w-[400px]">
-              <TabsList>
-                <TabsTrigger
-                  value="dashboard"
-                  onClick={() => (window.location.href = "/")}
-                >
-                  Dashboard
-                </TabsTrigger>
-                <TabsTrigger
-                  value="about"
-                  onClick={() => (window.location.href = "/about")}
-                >
-                  About
-                </TabsTrigger>
-                <TabsTrigger
-                  value="resources"
-                  onClick={() => (window.location.href = "/resources")}
-                >
-                  Resources
-                </TabsTrigger>
-              </TabsList>
-            </Tabs>
-          </nav>
+          <div className="flex items-center gap-4">
+            <nav className="hidden md:flex items-center gap-4">
+              <Tabs defaultValue="dashboard" className="w-[400px]">
+                <TabsList>
+                  <TabsTrigger
+                    value="dashboard"
+                    onClick={() => (window.location.href = "/")}
+                  >
+                    Dashboard
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="about"
+                    onClick={() => (window.location.href = "/about")}
+                  >
+                    About
+                  </TabsTrigger>
+                  <TabsTrigger
+                    value="resources"
+                    onClick={() => (window.location.href = "/resources")}
+                  >
+                    Resources
+                  </TabsTrigger>
+                </TabsList>
+              </Tabs>
+            </nav>
+            <ThemeToggle />
+            <MobileNav currentPath="/" />
+          </div>
         </div>
       </header>
 

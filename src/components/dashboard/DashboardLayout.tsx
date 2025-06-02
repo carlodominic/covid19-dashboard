@@ -13,6 +13,7 @@ import {
   CovidStatistics,
 } from "@/lib/data-generator";
 
+
 interface DashboardLayoutProps {
   className?: string;
 }
@@ -20,7 +21,6 @@ interface DashboardLayoutProps {
 const DashboardLayout: React.FC<DashboardLayoutProps> = ({
   className = "",
 }) => {
-  // State for selected filters
   const [selectedTimeRange, setSelectedTimeRange] = useState({
     start: new Date(2019, 0, 1),
     end: new Date(),
@@ -104,7 +104,7 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({
     .map(([metric]) => metric);
 
   return (
-    <div className={`flex flex-col w-full h-full bg-background ${className}`}>
+    <div className={`flex flex-col w-full h-full bg-background text-foreground ${className}`}>
       {/* Filter Controls Section */}
       <div className="w-full p-4 border-b">
         <FilterControls onFilterChange={handleFilterChange} />

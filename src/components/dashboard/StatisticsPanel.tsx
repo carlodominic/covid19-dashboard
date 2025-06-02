@@ -34,7 +34,7 @@ const StatisticCard = ({
   const isPositive = change > 0;
 
   return (
-    <Card className="bg-white">
+    <Card className="bg-background text-foreground">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">{title}</CardTitle>
         <div className="h-4 w-4 text-muted-foreground">{icon}</div>
@@ -107,7 +107,7 @@ const StatisticsPanel = ({
 }: StatisticsPanelProps) => {
   if (isLoading) {
     return (
-      <div className="h-full w-full overflow-auto rounded-xl border bg-background p-4 shadow-sm flex items-center justify-center">
+      <div className="h-full w-full overflow-auto rounded-xl border bg-background text-foreground p-4 shadow-sm flex items-center justify-center">
         <Loader2 className="h-8 w-8 animate-spin text-primary" />
         <span className="ml-2">Loading statistics...</span>
       </div>
@@ -116,7 +116,7 @@ const StatisticsPanel = ({
 
   if (!statistics) {
     return (
-      <div className="h-full w-full overflow-auto rounded-xl border bg-background p-4 shadow-sm flex items-center justify-center">
+      <div className="h-full w-full overflow-auto rounded-xl border bg-background text-foreground p-4 shadow-sm flex items-center justify-center">
         <span>No data available</span>
       </div>
     );
@@ -125,7 +125,7 @@ const StatisticsPanel = ({
   const formattedRegion = region.charAt(0).toUpperCase() + region.slice(1);
 
   return (
-    <div className="h-full w-full overflow-auto rounded-xl border bg-background p-4 shadow-sm">
+    <div className="h-full w-full overflow-auto rounded-xl border bg-background text-foreground p-4 shadow-sm">
       <h2 className="mb-4 text-xl font-semibold">
         {formattedRegion} Statistics
       </h2>
@@ -171,7 +171,7 @@ const StatisticsPanel = ({
             />
           </div>
 
-          <Card className="bg-white">
+          <Card className="bg-background text-foreground">
             <CardHeader>
               <CardTitle>Case Fatality Rate</CardTitle>
             </CardHeader>
@@ -219,7 +219,7 @@ const StatisticsPanel = ({
             />
           </div>
 
-          <Card className="bg-white">
+          <Card className="bg-background text-foreground">
             <CardHeader>
               <CardTitle>Trend Analysis</CardTitle>
             </CardHeader>
@@ -234,7 +234,7 @@ const StatisticsPanel = ({
         </TabsContent>
 
         <TabsContent value="vaccination" className="space-y-6 pt-4">
-          <Card className="bg-white">
+          <Card className="bg-background text-foreground">
             <CardHeader>
               <CardTitle>Vaccination Progress</CardTitle>
             </CardHeader>
@@ -266,7 +266,7 @@ const StatisticsPanel = ({
             </CardContent>
           </Card>
 
-          <Card className="bg-white">
+          <Card className="bg-background text-foreground">
             <CardHeader>
               <CardTitle>Vaccination Impact</CardTitle>
             </CardHeader>

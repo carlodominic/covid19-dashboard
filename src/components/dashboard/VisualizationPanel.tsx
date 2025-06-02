@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -14,7 +14,6 @@ import {
   Tooltip,
   Legend,
   ResponsiveContainer,
-  TooltipFormatter,
 } from "recharts";
 import { MapPin, Loader2 } from "lucide-react";
 import { formatNumber } from "@/lib/data-generator";
@@ -71,17 +70,30 @@ const VisualizationPanel = ({
   });
 
   // Custom tooltip formatter to display formatted numbers
-  const customTooltipFormatter: TooltipFormatter = (value) => {
+  // Custom tooltip formatter to display formatted numbers
+  const customTooltipFormatter = (value: number | string) => {
     return formatNumber(Number(value));
   };
-
   // Custom Y-axis tick formatter
   const formatYAxis = (value: number) => {
     return formatNumber(value);
   };
 
+  // Chart color palettes (use Tailwind colors for consistency)
+  const chartColors = {
+    cases: "#4f46e5", // indigo-700
+    deaths: "#dc2626", // red-600
+    recoveries: "#16a34a", // green-600
+    vaccinations: "#fbbf24", // yellow-400
+    grid: "#e5e7eb", // zinc-200
+    legend: "var(--foreground)",
+    heatmapLow: "#fff",
+    heatmapHigh: "#dc2626",
+    heatmapText: (intensity: number) => (intensity > 50 ? "#fff" : "#000"),
+  };
+
   return (
-    <Card className="w-full h-full bg-white">
+    <Card className="w-full h-full bg-background text-foreground">
       <CardHeader>
         <CardTitle className="text-xl font-bold">
           COVID-19 Data Visualization -{" "}
@@ -114,11 +126,14 @@ const VisualizationPanel = ({
                   data={filteredLineChartData}
                   margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                 >
-                  <CartesianGrid strokeDasharray="3 3" />
+                  <CartesianGrid
+                    stroke={chartColors.grid}
+                    strokeDasharray="3 3"
+                  />
                   <XAxis
                     dataKey="date"
                     tick={{ fontSize: 12 }}
-                    interval={Math.ceil(filteredLineChartData.length / 12)} // Show fewer ticks on small screens
+                    interval={Math.ceil(filteredLineChartData.length / 12)}
                   />
                   <YAxis tickFormatter={formatYAxis} width={60} />
                   <Tooltip formatter={customTooltipFormatter} />
@@ -128,7 +143,7 @@ const VisualizationPanel = ({
                       type="monotone"
                       dataKey="cases"
                       name="Cases"
-                      stroke="#8884d8"
+                      stroke={chartColors.cases}
                       activeDot={{ r: 8 }}
                       strokeWidth={2}
                     />
@@ -138,7 +153,7 @@ const VisualizationPanel = ({
                       type="monotone"
                       dataKey="deaths"
                       name="Deaths"
-                      stroke="#ff0000"
+                      stroke={chartColors.deaths}
                       strokeWidth={2}
                     />
                   )}
@@ -147,7 +162,7 @@ const VisualizationPanel = ({
                       type="monotone"
                       dataKey="recoveries"
                       name="Recoveries"
-                      stroke="#82ca9d"
+                      stroke={chartColors.recoveries}
                       strokeWidth={2}
                     />
                   )}
@@ -156,7 +171,7 @@ const VisualizationPanel = ({
                       type="monotone"
                       dataKey="vaccinations"
                       name="Vaccinations"
-                      stroke="#ffc658"
+                      stroke={chartColors.vaccinations}
                       strokeWidth={2}
                     />
                   )}
@@ -170,29 +185,32 @@ const VisualizationPanel = ({
                   data={barChartData}
                   margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                 >
-                  <CartesianGrid strokeDasharray="3 3" />
+                  <CartesianGrid
+                    stroke={chartColors.grid}
+                    strokeDasharray="3 3"
+                  />
                   <XAxis dataKey="region" tick={{ fontSize: 12 }} />
                   <YAxis tickFormatter={formatYAxis} width={60} />
                   <Tooltip formatter={customTooltipFormatter} />
                   <Legend />
                   {selectedMetrics.includes("cases") && (
-                    <Bar dataKey="cases" name="Cases" fill="#8884d8" />
+                    <Bar dataKey="cases" name="Cases" fill={chartColors.cases} />
                   )}
                   {selectedMetrics.includes("deaths") && (
-                    <Bar dataKey="deaths" name="Deaths" fill="#ff0000" />
+                    <Bar dataKey="deaths" name="Deaths" fill={chartColors.deaths} />
                   )}
                   {selectedMetrics.includes("recoveries") && (
                     <Bar
                       dataKey="recoveries"
                       name="Recoveries"
-                      fill="#82ca9d"
+                      fill={chartColors.recoveries}
                     />
                   )}
                   {selectedMetrics.includes("vaccinations") && (
                     <Bar
                       dataKey="vaccinations"
                       name="Vaccinations"
-                      fill="#ffc658"
+                      fill={chartColors.vaccinations}
                     />
                   )}
                 </BarChart>
@@ -205,7 +223,10 @@ const VisualizationPanel = ({
                   data={filteredLineChartData}
                   margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                 >
-                  <CartesianGrid strokeDasharray="3 3" />
+                  <CartesianGrid
+                    stroke={chartColors.grid}
+                    strokeDasharray="3 3"
+                  />
                   <XAxis
                     dataKey="date"
                     tick={{ fontSize: 12 }}
@@ -220,8 +241,8 @@ const VisualizationPanel = ({
                       dataKey="cases"
                       name="Cases"
                       stackId="1"
-                      stroke="#8884d8"
-                      fill="#8884d8"
+                      stroke={chartColors.cases}
+                      fill={chartColors.cases}
                       fillOpacity={0.6}
                     />
                   )}
@@ -231,8 +252,8 @@ const VisualizationPanel = ({
                       dataKey="deaths"
                       name="Deaths"
                       stackId="1"
-                      stroke="#ff0000"
-                      fill="#ff0000"
+                      stroke={chartColors.deaths}
+                      fill={chartColors.deaths}
                       fillOpacity={0.6}
                     />
                   )}
@@ -242,8 +263,8 @@ const VisualizationPanel = ({
                       dataKey="recoveries"
                       name="Recoveries"
                       stackId="1"
-                      stroke="#82ca9d"
-                      fill="#82ca9d"
+                      stroke={chartColors.recoveries}
+                      fill={chartColors.recoveries}
                       fillOpacity={0.6}
                     />
                   )}
@@ -253,8 +274,8 @@ const VisualizationPanel = ({
                       dataKey="vaccinations"
                       name="Vaccinations"
                       stackId="1"
-                      stroke="#ffc658"
-                      fill="#ffc658"
+                      stroke={chartColors.vaccinations}
+                      fill={chartColors.vaccinations}
                       fillOpacity={0.6}
                     />
                   )}
@@ -270,8 +291,9 @@ const VisualizationPanel = ({
                       key={item.id}
                       className="p-4 rounded-lg flex items-center justify-between"
                       style={{
-                        backgroundColor: `rgba(255, 0, 0, ${item.intensity / 100})`,
-                        color: item.intensity > 50 ? "white" : "black",
+                        background: `rgba(220,38,38,${item.intensity / 100})`,
+                        color: chartColors.heatmapText(item.intensity),
+                        border: "1px solid #e5e7eb",
                       }}
                     >
                       <div className="flex items-center truncate mr-2">
@@ -285,7 +307,12 @@ const VisualizationPanel = ({
                   ))}
                 </div>
                 <div className="mt-6 w-full flex justify-center">
-                  <div className="w-3/4 h-6 bg-gradient-to-r from-white to-red-600 rounded-md"></div>
+                  <div
+                    className="w-3/4 h-6 rounded-md"
+                    style={{
+                      background: `linear-gradient(90deg, #fff, #dc2626)`,
+                    }}
+                  ></div>
                 </div>
                 <div className="w-3/4 flex justify-between mt-1">
                   <span className="text-xs">Low</span>
