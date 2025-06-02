@@ -103,7 +103,7 @@ const ResourcesPage = () => {
           </CardHeader>
           <CardContent>
             <p className="text-muted-foreground mb-6">
-              Our dashboard aggregates and visualizes data from the following
+              The dashboard aggregates and visualizes data from the following
               trusted sources. These organizations provide comprehensive,
               up-to-date information about the COVID-19 pandemic.
             </p>
@@ -162,7 +162,7 @@ const ResourcesPage = () => {
         <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
           <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
             <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-              &copy; {new Date().getFullYear()} COVID-19 Data Dashboard. Data
+              &copy; Created by Carlo Dominic Suaybaguio | Data
               sourced from public health agencies.
             </p>
           </div>

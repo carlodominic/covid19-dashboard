@@ -52,19 +52,19 @@ const AboutPage = () => {
       <main className="container py-6">
         <Card className="mb-6">
           <CardHeader>
-            <CardTitle>About This Dashboard</CardTitle>
+            <CardTitle>About the Dashboard</CardTitle>
             <CardDescription>
               Understanding the COVID-19 Data Visualization Project
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-6">
             <div>
-              <h3 className="text-lg font-semibold mb-2">Project Overview</h3>
+              <h3 className="text-lg font-semibold mb-2">Overview</h3>
               <p className="text-muted-foreground">
                 This COVID-19 Data Dashboard was created to provide accessible,
-                interactive visualizations of pandemic data. Our goal is to help
+                interactive visualizations of pandemic data. The goal is to help
                 users understand the complex patterns and trends of the COVID-19
-                pandemic through intuitive data representations.
+                pandemic through data representations.
               </p>
             </div>
 
@@ -85,9 +85,9 @@ const AboutPage = () => {
             <div>
               <h3 className="text-lg font-semibold mb-2">Data Sources</h3>
               <p className="text-muted-foreground">
-                Our dashboard aggregates data from multiple reputable public
+                The dashboard aggregates data from multiple reputable public
                 health organizations and research institutions. For a complete
-                list of our data sources with links, please visit our{" "}
+                list of the data sources with links, please visit the{" "}
                 <a href="/resources" className="text-primary hover:underline">
                   Resources
                 </a>{" "}
@@ -100,7 +100,7 @@ const AboutPage = () => {
               <p className="text-muted-foreground">
                 The visualizations presented in this dashboard are based on
                 publicly available data that has been processed and normalized
-                to enable meaningful comparisons. We regularly update our data
+                to enable meaningful comparisons. It regularly update the data
                 to ensure accuracy and relevance.
               </p>
             </div>
@@ -122,7 +122,7 @@ const AboutPage = () => {
         <div className="container flex flex-col items-center justify-between gap-4 py-10 md:h-24 md:flex-row md:py-0">
           <div className="flex flex-col items-center gap-4 px-8 md:flex-row md:gap-2 md:px-0">
             <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-              &copy; {new Date().getFullYear()} COVID-19 Data Dashboard. Data
+              &copy; Created by Carlo Dominic Suaybaguio | Data
               sourced from public health agencies.
             </p>
           </div>
